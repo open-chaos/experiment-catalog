@@ -3,7 +3,8 @@
     "title": "My application is resilient to node drainage",
     "description": "Can my application maintain its minimum resources in the event of node drainage?",
     "tags": [
-        "kubernetes"
+        "platform:kubernetes",
+        "service:node"
     ],
     "configuration": {
         "service_url": {
