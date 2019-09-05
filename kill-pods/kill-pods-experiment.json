@@ -3,7 +3,8 @@
     "title": "My application is resilient to pod death",
     "description": "Can my application maintain itself under the conditions of pod death?",
     "tags": [
-        "kubernetes"
+        "platform:kubernetes",
+        "service:pod"
     ],
     "configuration": {
         "service_url": {
