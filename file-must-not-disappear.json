@@ -1,0 +1,39 @@
+{
+    "version": "1.0.0",
+    "title": "Configuration file will remain after deploying an update",
+    "description": "We expect the configuration file of our application to keep existing when updating it",
+    "tags": [
+        "platform:general",
+        "service:io"
+    ],
+    "steady-state-hypothesis": {
+        "title": "File does exist",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "file-found-where-it-should-be",
+                "tolerance": true,
+                "provider": {
+                    "type": "python",
+                    "module": "os.path",
+                    "func": "exists",
+                    "arguments": {
+                        "path": "/tmp/somewhere.txt"
+                    }
+                }
+            }
+        ]
+    },
+    "method": [
+		{
+            "type": "action",
+            "name": "rollout-application-update",
+            "provider": {
+                "type": "process",
+                "path": "echo",
+                "arguments": "'updated'"
+            }
+        }
+    ],
+    "rollbacks": []
+}
