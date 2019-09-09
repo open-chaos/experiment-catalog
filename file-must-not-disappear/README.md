@@ -47,7 +47,7 @@ $ docker run -it \
            -e FILE_TO_CHECK=temp.txt \
            -v `pwd`:/tmp/result \
            -v /Users/russellmiles/.chaostoolkit:/tmp/settings \
-           quay.io/chaosiq/chaostoolkit-cloud:0.1 \
+           chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
            run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/file-must-not-disappear/file-must-not-disappear.json
 ```
@@ -71,10 +71,10 @@ With `docker`:
 
 ```bash
 $ docker run -it \
-           -e FILE_TO_CHECK=temp.txt \
-           -v `pwd`:/tmp/result \
-           -v /Users/russellmiles/.chaostoolkit:/tmp/settings \
-           quay.io/chaosiq/chaostoolkit-cloud:0.1 \
-           --settings /tmp/settings/settings.yaml \
-           run file-must-not-disappear.json
+          -e FILE_TO_CHECK=temp.txt \
+          -v `pwd`:/tmp/result \
+          -v /Users/russellmiles/.chaostoolkit:/tmp/settings \
+          chaostoolkit/chaostoolkit \
+          --settings /tmp/settings/settings.yaml \
+          run /tmp/result/file-must-not-disappear.json
 ```
