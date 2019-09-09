@@ -6,6 +6,17 @@
         "platform:general",
         "service:io"
     ],
+    "configuration": {
+        "filename": {
+            "type": "env",
+            "key": "FILE_TO_CHECK"
+        }
+    },
+    "contributions": {
+        "availability": "none",
+        "reliability": "none",
+        "safety": "low"
+    },
     "steady-state-hypothesis": {
         "title": "File does exist",
         "probes": [
@@ -18,7 +29,7 @@
                     "module": "os.path",
                     "func": "exists",
                     "arguments": {
-                        "path": "/tmp/somewhere.txt"
+                        "path": "${filename}"
                     }
                 }
             }
