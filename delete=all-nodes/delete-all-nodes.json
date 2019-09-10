@@ -1,0 +1,57 @@
+{
+    "version": "1.0.0",
+    "title": "My application is resilient to node deletion",
+    "description": "Can my application maintain its minimum resources in the event of node deletion?",
+    "tags": [
+        "platform:kubernetes",
+        "service:node"
+    ],
+    "configuration": {
+        "service_url": {
+            "type": "env",
+            "key": "APPLICATION_ENTRYPOINT_URL"
+        },
+        "label_selector": {
+            "type": "env",
+            "key": "NODE_LABEL"
+        }
+    },
+    "contributions": {
+        "availability": "high",
+        "reliability": "high",
+        "safety": "medium",
+        "security": "none",
+        "performability": "none"
+    },
+    "steady-state-hypothesis": {
+        "title": "Application is normal",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "application-must-respond-normally",
+                "tolerance": 200,
+                "provider": {
+                    "type": "http",
+                    "url": "${service_url}",
+                    "timeout": 3
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+
+            "type": "action",
+            "name": "delete_nodes",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.node.actions",
+                "func": "delete_nodes",
+                "arguments": {
+                    "name": "${label_selector}",
+                    "all":  "True"
+                }
+            }
+        }
+    ]
+}
