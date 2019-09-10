@@ -1,10 +1,6 @@
 # Welcome to the ChaosIQ Experiment Catalog!
 
-This catalog is source for the free and public catalog of experiments for the Chaos Toolkit, provided by [ChaosIQ][].
-
-[ChaosIQ]: https://chaosiq.io/
-
-You can use these experiments with the free and open source Chaos Toolkit and with the commercial ChaosIQ tooling and applications.
+This catalog is source for the free and public catalog of chaos engineering experiments for the Chaos Toolkit.
 
 ## Catalog Layout and Experiment Format
 
