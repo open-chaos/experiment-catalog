@@ -1,6 +1,6 @@
 # Welcome to the Open Chaos Experiment Catalog!
 
-This catalog is source for the free and public catalog of chaos engineering experiments for the Chaos Toolkit.
+This catalog is source for the free and public catalog of chaos engineering experiments.
 
 ## Catalog Layout and Experiment Format
 
