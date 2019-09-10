@@ -46,7 +46,7 @@ With the native `chaos` command:
                    chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kill-pods/kill-pods-experiment.json
 ```
 
-> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & POD_NAMESPACE should be setup according to your Kubernetes run time environment
+> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & POD_NAMESPACE should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
@@ -56,7 +56,7 @@ $ docker run -it \
            -e POD_LABEL=myapp \
            -e POD_NAMESPACE=testapp \
            -v `pwd`:/tmp/result \
-           -v /Users/russellmiles/.chaostoolkit:/tmp/settings \
+           -v ~/.chaostoolkit:/tmp/settings \
            quay.io/chaosiq/chaostoolkit-cloud:0.1 \
            --settings /tmp/settings/settings.yaml \
            run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kill-pods/kill-pods-experiment.json
@@ -77,7 +77,7 @@ With the native `chaos` command:
                    chaos run kill-pods-experiment.json
 ```
 
-> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & POD_NAMESPACE should be setup according to your Kubernetes run time environment
+> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & POD_NAMESPACE should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
@@ -87,7 +87,7 @@ $ docker run -it \
            -e POD_LABEL=myapp \
            -e POD_NAMESPACE=testapp \
            -v `pwd`:/tmp/result \
-           -v /Users/russellmiles/.chaostoolkit:/tmp/settings \
+           -v ~/.chaostoolkit:/tmp/settings \
            quay.io/chaosiq/chaostoolkit-cloud:0.1 \
            --settings /tmp/settings/settings.yaml \
            run kill-pods-experiment.json

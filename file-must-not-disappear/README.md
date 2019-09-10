@@ -28,7 +28,7 @@ This experiment requires the following parameters:
 
 ### Running the Experiment Direct from the Catalog using HTTP
 
-You can run this experiment using the native `chaos` command, or using 
+You can run this experiment using the native `chaos` command, or using
 `docker`.
 
 With the native `chaos` command:
@@ -38,7 +38,7 @@ With the native `chaos` command:
                    chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/file-must-not-disappear/file-must-not-disappear.json
 ```
 
-> ***NOTE:*** The `temp.txt` should be changed to whatever file you want to ensure is present after deployment has occurred.
+> ***NOTE:*** The `temp.txt` should be changed to whatever file you want to ensure is present after deployment has occurred. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
@@ -46,7 +46,7 @@ With `docker`:
 $ docker run -it \
            -e FILE_TO_CHECK=temp.txt \
            -v `pwd`:/tmp/result \
-           -v /Users/russellmiles/.chaostoolkit:/tmp/settings \
+           -v ~/.chaostoolkit:/tmp/settings \
            chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
            run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/file-must-not-disappear/file-must-not-disappear.json
@@ -55,7 +55,7 @@ $ docker run -it \
 
 ### Running the Experiment from a Local Copy
 
-You can run this experiment using the native `chaos` command, or using 
+You can run this experiment using the native `chaos` command, or using
 `docker`.
 
 With the native `chaos` command:
@@ -65,7 +65,7 @@ With the native `chaos` command:
                    chaos run file-must-not-disappear.json
 ```
 
-> ***NOTE:*** The `temp.txt` should be changed to whatever file you want to ensure is present after deployment has occurred.
+> ***NOTE:*** The `temp.txt` should be changed to whatever file you want to ensure is present after deployment has occurred. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
@@ -73,7 +73,7 @@ With `docker`:
 $ docker run -it \
           -e FILE_TO_CHECK=temp.txt \
           -v `pwd`:/tmp/result \
-          -v /Users/russellmiles/.chaostoolkit:/tmp/settings \
+          -v ~/.chaostoolkit:/tmp/settings \
           chaostoolkit/chaostoolkit \
           --settings /tmp/settings/settings.yaml \
           run /tmp/result/file-must-not-disappear.json
