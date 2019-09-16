@@ -1,0 +1,123 @@
+{
+    "version": "1.0.0",
+    "title": "The application should stay within tolerance when dependency responses slow down.",
+    "description": "Uses the Spring Chaos Monkey to manipulate a service",
+    "tags": [
+        "platform:java",
+        "service:spring"
+    ],
+    "configuration": {
+        "service_url": {
+            "type": "env",
+            "key": "APPLICATION_ENTRYPOINT_URL"
+        },
+        "latency_actuator_url": {
+            "type": "env",
+            "key": "CHAOS_MONKEY_ACTUATOR_URL"
+        }
+    },
+    "contributions": {
+        "availability": "high",
+        "reliability": "high",
+        "performability": "medium",
+        "safety": "none",
+        "security": "none"
+    },
+    "steady-state-hypothesis": {
+        "title": "System is healthy",
+        "probes": [
+            {
+                "name": "consumer-service-must-still-respond",
+                "type": "probe",
+                "provider": {
+                    "type": "http",
+                    "url": "${service_url}"
+                },
+                "tolerance": 200,
+                "timeout": 1
+            }
+        ]
+    },
+    "method": [
+        {
+            "name": "enable_chaosmonkey",
+            "provider": {
+                "arguments": {
+                    "base_url": "${latency_actuator_url}"
+                },
+                "func": "enable_chaosmonkey",
+                "module": "chaosspring.actions",
+                "type": "python"
+            },
+            "type": "action"
+        },
+        {
+            "name": "configure_assaults",
+            "provider": {
+                "arguments": {
+                    "base_url": "${latency_actuator_url}",
+                    "assaults_configuration": {
+                        "level": 1,
+                        "latencyRangeStart": 10000,
+                        "latencyRangeEnd": 10000,
+                        "latencyActive": true,
+                        "exceptionsActive": false,
+                        "killApplicationActive": false,
+                        "restartApplicationActive": false
+                    }
+                },
+                "func": "change_assaults_configuration",
+                "module": "chaosspring.actions",
+                "type": "python"
+            },
+            "type": "action"
+        },
+        {
+            "name": "get_configured_assaults",
+            "provider": {
+                "arguments": {
+                    "base_url": "${latency_actuator_url}"
+                },
+                "func": "assaults_configuration",
+                "module": "chaosspring.probes",
+                "type": "python"
+            },
+            "type": "probe"
+        }
+    ],
+    "rollbacks": [
+        {
+            "name": "configure_assaults", 
+            "provider": {
+                "arguments": {
+                    "base_url": "${latency_actuator_url}",
+                    "assaults_configuration": {
+                        "level": 1,
+                        "latencyRangeStart": 10000,
+                        "latencyRangeEnd": 10000,
+                        "latencyActive": false,
+                        "exceptionsActive": false,
+                        "killApplicationActive": false,
+                        "restartApplicationActive": false
+                    }
+                },
+                "func": "change_assaults_configuration",
+                "module": "chaosspring.actions",
+                "type": "python"
+            },
+            "type": "action"
+        },
+        {
+            "name": "disable_chaosmonkey",
+            "provider": {
+                "arguments": {
+                    "base_url": "${latency_actuator_url}"
+                },
+                "func": "disable_chaosmonkey",
+                "module": "chaosspring.actions",
+                "type": "python"
+            },
+            "type": "action"
+        }
+    ]
+}
