@@ -1,0 +1,58 @@
+{
+    "version": "1.0.0",
+    "title": "My application is resilient to microservice death",
+    "description": "Can my application maintain itself when a micoservice dies",
+    "tags": [
+        "platform:kubernetes",
+        "service:pod"
+    ],
+    "configuration": {
+        "service_url": {
+            "type": "env",
+            "key": "APPLICATION_ENTRYPOINT_URL"
+        },
+        "service_name": {
+            "type": "env",
+            "key": "SERVICE_NAME"
+        }
+    },
+    "contributions": {
+        "availability": "high",
+        "reliability": "high",
+        "safety": "none",
+        "security": "none",
+        "performability": "none"
+    },
+    "steady-state-hypothesis": {
+        "title": "Application is normal",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "application-must-respond-normally",
+                "tolerance": 200,
+                "provider": {
+                    "type": "http",
+                    "url": "${service_url}",
+                    "timeout": 0.5
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "kill-microservice",
+            "provider": {
+                "module": "chaosk8s.actions",
+                "type": "python",
+                "func": "kill_microservice",
+                "arguments": {
+                    "name": "${service_name}"
+                }
+            },
+            "pauses": {
+                "after": 2
+            }
+        }
+    ]
+}
