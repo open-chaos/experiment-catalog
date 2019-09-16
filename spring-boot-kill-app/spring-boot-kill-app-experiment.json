@@ -1,0 +1,88 @@
+{
+    "version": "1.0.0",
+    "title": "Can my application survive robustly service dependency death",
+    "description": "Uses the Spring Chaos Monkey to manipulate a service",
+    "tags": [
+        "platform:java",
+        "service:spring"
+    ],
+    "configuration": {
+        "service_url": {
+            "type": "env",
+            "key": "APPLICATION_ENTRYPOINT_URL"
+        },
+        "actuator_url": {
+            "type": "env",
+            "key": "CHAOS_MONKEY_ACTUATOR_URL"
+        },
+        "dependency_url": {
+            "type": "env",
+            "key": "DEPENDENCY_URL"
+        }
+    },
+    "contributions": {
+        "availability": "high",
+        "reliability": "high",
+        "performability": "medium",
+        "safety": "none",
+        "security": "none"
+    },
+    "steady-state-hypothesis": {
+        "probes": [
+            {
+                "name": "consumer-service-must-still-respond",
+                "provider": {
+                    "type": "http",
+                    "url": "${service_url}"
+                },
+                "tolerance": 200,
+                "type": "probe"
+            }
+        ],
+        "title": "System is healthy"
+    },
+    "method": [
+        {
+            "name": "enable_chaosmonkey",
+            "provider": {
+                "arguments": {
+                    "base_url": "${actuator_url}"
+                },
+                "func": "enable_chaosmonkey",
+                "module": "chaosspring.actions",
+                "type": "python"
+            },
+            "type": "action"
+        },
+        {
+            "name": "configure_assaults",
+            "provider": {
+                "arguments": {
+                    "base_url": "${actuator_url}",
+                    "assaults_configuration": {
+                        "level": 1,
+                        "latencyRangeStart": 2000,
+                        "latencyRangeEnd": 5000,
+                        "latencyActive": false,
+                        "exceptionsActive": false,
+                        "killApplicationActive": true,
+                        "restartApplicationActive": false
+                    }
+                },
+                "func": "change_assaults_configuration",
+                "module": "chaosspring.actions",
+                "type": "python"
+            },
+            "type": "action"
+        },
+        {
+            "name": "trigger-kill",
+            "provider": {
+                "type": "http",
+                "url": "${dependency_url}"
+            },
+            "type": "probe"
+        }
+    ],
+    "rollbacks": []
+}
