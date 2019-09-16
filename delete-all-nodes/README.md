@@ -1,6 +1,6 @@
-# Drain a Kubernetes Node Chaos Experiment
+# Delete Kubernetes Nodes Chaos Experiment
 
-This experiment explores whether my application can maintain itself when a Kubernetes node is drained
+This experiment explores whether my application when all of a Kubernetes cluster nodes are deleted. The belief being explored here is that you have multiple clusters for your application and it will failover to another cluster.
 
 ## Setup for Experiment Execution
 
@@ -29,7 +29,6 @@ This experiment requires the following parameters:
 
 * Environment Variables
   * `APPLICATION_ENTRYPOINT_URL` - Specifies the application entry point URL where your application can be reached in your environment.
-  *  `NODE_LABEL` - Specifies the label used to identify the pod that you are goin g to kill
 
 ## Running the Experiment Direct from the Catalog using HTTP
 
@@ -40,21 +39,19 @@ With the native `chaos` command:
 
 ```bash
 (chaostk) export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
-          export NODE_LABEL=myapp; \
           chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/drain-node/delete-all-nodes.json
 ```
 
-> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & NODE_NAME should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
+> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
 ```bash
 $ docker run -it \
            -e APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp \
-           -e NODE_LABEL=myapp \
            -v `pwd`:/tmp/result \
            -v ~/.chaostoolkit:/tmp/settings \
-           quay.io/chaosiq/chaostoolkit-cloud:0.1 \
+            chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
            run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/drain-node/delete-all-nodes.json
 ```
@@ -69,22 +66,19 @@ With the native `chaos` command:
 
 ```bash
 (chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
-          $ export NODE_LABEL=myapp; \
-                   chaos run delete-all-nodes.json
+            chaos run delete-all-nodes.json
 ```
 
-> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & NODE_NAME should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
+ ***NOTE:*** The APPLICATION_ENTRYPOINT_URL should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
 ```bash
 $ docker run -it \
            -e APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp \
-           -e POD_LABEL=myapp \
-           -e POD_NAMESPACE=testapp \
            -v `pwd`:/tmp/result \
            -v ~/.chaostoolkit:/tmp/settings \
-           quay.io/chaosiq/chaostoolkit-cloud:0.1 \
+            chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
            run delete-all-nodes.json
 ```

@@ -10,16 +10,12 @@
         "service_url": {
             "type": "env",
             "key": "APPLICATION_ENTRYPOINT_URL"
-        },
-        "label_selector": {
-            "type": "env",
-            "key": "NODE_LABEL"
         }
     },
     "contributions": {
         "availability": "high",
         "reliability": "high",
-        "safety": "medium",
+        "safety": "none",
         "security": "none",
         "performability": "none"
     },
@@ -40,7 +36,6 @@
     },
     "method": [
         {
-
             "type": "action",
             "name": "delete_nodes",
             "provider": {
@@ -48,7 +43,6 @@
                 "module": "chaosk8s.node.actions",
                 "func": "delete_nodes",
                 "arguments": {
-                    "name": "${label_selector}",
                     "all":  "True"
                 }
             }
