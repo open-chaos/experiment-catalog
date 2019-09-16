@@ -57,7 +57,7 @@ $ docker run -it \
            -e POD_NAMESPACE=testapp \
            -v `pwd`:/tmp/result \
            -v ~/.chaostoolkit:/tmp/settings \
-           quay.io/chaosiq/chaostoolkit-cloud:0.1 \
+           chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
            run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kill-pods/kill-pods-experiment.json
 ```
@@ -88,7 +88,7 @@ $ docker run -it \
            -e POD_NAMESPACE=testapp \
            -v `pwd`:/tmp/result \
            -v ~/.chaostoolkit:/tmp/settings \
-           quay.io/chaosiq/chaostoolkit-cloud:0.1 \
+           chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
            run kill-pods-experiment.json
 ```

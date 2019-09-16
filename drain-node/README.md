@@ -57,7 +57,7 @@ $ docker run -it \
            -e NODE_NAME=mynode \
            -v `pwd`:/tmp/result \
            -v ~/.chaostoolkit:/tmp/settings \
-           quay.io/chaosiq/chaostoolkit-cloud:0.1 \
+           chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
            run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/drain-node/drain-node-experiment.json
 ```
@@ -88,7 +88,7 @@ $ docker run -it \
            -e POD_NAMESPACE=testapp \
            -v `pwd`:/tmp/result \
            -v ~/.chaostoolkit:/tmp/settings \
-           quay.io/chaosiq/chaostoolkit-cloud:0.1 \
+           chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
            run drain-node-experiment.json
 ```
