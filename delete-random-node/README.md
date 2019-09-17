@@ -60,7 +60,7 @@ $ docker run -it \
             chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
            run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/delete-random-node/delete-random-node-experiment.json
-
+```
 
 ### Running the Experiment from a Local Copy
 
