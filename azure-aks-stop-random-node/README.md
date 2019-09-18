@@ -15,11 +15,11 @@ This experiment uses the [free and open source Chaos Toolkit][chaostoolkit]. The
 
 The [Chaos Toolkit][chaostoolkit] is extended by adding [drivers]. This experiment requires the following drivers:
 
-* Kubernetes Chaos Toolkit Driver [kubernetes-driver] [kubernetes-driver-github]
+* Chaos Toolkit Extension for Azure [azure-driver] [azure-driver-github]
 
 [drivers]: https://docs.chaostoolkit.org/drivers/overview/
-[kubernetes-driver]: https://docs.chaostoolkit.org/drivers/kubernetes/
-[kubernetes-driver-github]: https://github.com/chaostoolkit/chaostoolkit-kubernetes
+[azure-driver]: https://docs.chaostoolkit.org/drivers/azure/
+[azure-driver-github]: https://github.com/chaostoolkit-incubator/chaostoolkit-azure
 
 ## Running the Experiment
 
