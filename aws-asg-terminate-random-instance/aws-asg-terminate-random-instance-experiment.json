@@ -1,0 +1,48 @@
+{
+    "version": "1.0.0",
+    "title": "My application is resilient to random termination of an asg instance",
+    "description": "Can my application maintain its minimum resources in the event of the rterminateion of a random asg instance?",
+    "tags": [
+        "platform:aws",
+        "service:asg"
+    ],
+    "configuration": {
+        "service_url": {
+            "type": "env",
+            "key": "APPLICATION_ENTRYPOINT_URL"
+        }
+    },
+    "contributions": {
+        "availability": "high",
+        "reliability": "high",
+        "safety": "none",
+        "security": "none",
+        "performability": "medium"
+    },
+    "steady-state-hypothesis": {
+        "title": "Application is normal",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "application-must-respond-normally",
+                "tolerance": 200,
+                "provider": {
+                    "type": "http",
+                    "url": "${service_url}",
+                    "timeout": 3
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "terminate_instance",
+            "provider": {
+                "type": "python",
+                "module": "chaosaws.asg.actions",
+                "func": "terminate_random_instances"
+            }
+        }
+    ]
+}
