@@ -1,0 +1,71 @@
+{
+    "version": "1.0.0",
+    "title": "My application is resilient to stopping a random node",
+    "description": "Can my application maintain its minimum resources in the event of random node being stopped?",
+    "tags": [
+        "platform:azure",
+        "service:aks"
+    ],
+    "configuration": {
+        "subscription_id": {
+            "type": "env",
+            "key": "AZURE_SUBSCRIPTION_ID"
+        },
+        "service_url": {
+            "type": "env",
+            "key": "APPLICATION_ENTRYPOINT_URL"
+        }
+    },
+    "secrets": {
+        "azure": {
+            "client_id": {
+                "type": "env",
+                "key": "AZURE_CLIENT_ID"
+            },
+            "client_secret": {
+                "type": "env",
+                "key": "AZURE_CLIENT_SECRET"
+            },
+            "tenant_id": {
+                "type": "env",
+                "key": "AZURE_TENANT_ID"
+            }
+        }
+    },
+    "contributions": {
+        "availability": "high",
+        "reliability": "high",
+        "safety": "none",
+        "security": "none",
+        "performability": "medium"
+    },
+    "steady-state-hypothesis": {
+        "title": "Application is normal",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "application-must-respond-normally",
+                "tolerance": 200,
+                "provider": {
+                    "type": "http",
+                    "url": "${service_url}",
+                    "timeout": 3
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "stop-node",
+            "provider": {
+                "type": "python",
+                "module": "chaosazure.aks.actions",
+                "func": "delete_node",
+                "secrets": [
+                    "azure"
+                ]
+            }
+        }
+    ]
+}
