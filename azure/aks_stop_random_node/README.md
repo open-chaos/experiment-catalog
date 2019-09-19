@@ -45,7 +45,7 @@ With the native `chaos` command:
           export AZURE_CLIENT_ID=myclientid ; \
           export AZURE_CLIENT_SECRET=myclientsecret ; \
           export AZURE_TENANT_ID=mytenantid ; \
-                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/azure-aks-stop-random-node/stop-random-node-experiment.json
+                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/azure/aks_stop_random_node/stop_random_node_experiment.json
 ```
 
 ***NOTE:*** The APPLICATION_ENTRYPOINT_URL should be setup according to your Kubernetes run time environment. The AZURE_SUBSCRIPTION_ID, AZURE_CLIENT_ID, AZURE_CLIENT_SECRET and AZURE_TENANT_ID should be setup according to your Azure settings. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
@@ -63,7 +63,7 @@ $ docker run -it \
           -v ~/.chaostoolkit:/tmp/settings \
           chaostoolkit/chaostoolkit \
           --settings /tmp/settings/settings.yaml \
-          run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/azure-aks-stop-random-node/stop-random-node-experiment.json
+          run hhttps://raw.githubusercontent.com/open-chaos/experiment-catalog/master/azure/aks_stop_random_node/stop_random_node_experiment.json
 
 
 ### Running the Experiment from a Local Copy
@@ -79,7 +79,7 @@ With the native `chaos` command:
           export AZURE_CLIENT_ID=myclientid ; \
           export AZURE_CLIENT_SECRET=myclientsecret ; \
           export AZURE_TENANT_ID=mytenantid ; \
-          chaos run stop-random-node-experiment.json
+          chaos run stop_random_node_experiment.json
 ```
 
 ***NOTE:*** The APPLICATION_ENTRYPOINT_URL should be setup according to your Kubernetes run time environment. The AZURE_SUBSCRIPTION_ID, AZURE_CLIENT_ID, AZURE_CLIENT_SECRET and AZURE_TENANT_ID should be setup according to your Azure settings. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
@@ -96,5 +96,5 @@ $ docker run -it \
           -v ~/.chaostoolkit:/tmp/settings \
           chaostoolkit/chaostoolkit \
           --settings /tmp/settings/settings.yaml \
-          run stop-random-node-experiment.json
+          run stop_random_node_experiment.json
 ```
