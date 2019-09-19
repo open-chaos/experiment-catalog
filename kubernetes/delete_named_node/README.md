@@ -1,6 +1,6 @@
 # Delete a Kubernetes Node Chaos Experiment
 
-This experiment explores whether my application can maintain itself when a named random Kubernetes node is deleted.
+This experiment explores whether my application can maintain itself when a named Kubernetes node is deleted.
 
 ## Setup for Experiment Execution
 
@@ -43,7 +43,7 @@ With the native `chaos` command:
 (chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
           $ export POD_LABEL=myapp; \
           $ export NODE_NAME=mynode; \
-                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/delete-random-node/delete-random-node-experiment.json
+                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kubernetes/delete_named_node/delete_named_node_exeriment.json
 ```
 
 > ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & NODE_NAME should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
@@ -59,8 +59,10 @@ $ docker run -it \
            -v ~/.chaostoolkit:/tmp/settings \
             chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/delete-random-node/delete-random-node-experiment.json
+           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kubernetes/delete_named_node/delete_named_node_exeriment.json
 ```
+```
+
 
 ### Running the Experiment from a Local Copy
 
@@ -73,7 +75,7 @@ With the native `chaos` command:
 (chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
           $ export POD_LABEL=myapp; \
           $ export POD_NAMESPACE=testapp; \
-                   chaos run delete-named-node-exeriment.json
+                   chaos run delete_named_node_exeriment.json
 ```
 
 > ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & NODE_NAME should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
@@ -89,5 +91,5 @@ $ docker run -it \
            -v ~/.chaostoolkit:/tmp/settings \
              chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run delete-random-node-experiment.json
+           run delete_named_node_exeriment.json
 ```

@@ -1,6 +1,6 @@
-# Kill a Kubernetes pod chaos experiment
+# Drain a Kubernetes Node Chaos Experiment
 
-This experiment explores whether my application can maintain itself when a Kubernetes pod dies.
+This experiment explores whether my application can maintain itself when a Kubernetes node is drained
 
 ## Setup for Experiment Execution
 
@@ -23,14 +23,14 @@ The chaostoolkit is extended by adding [drivers] This experiment requires the fo
 
 ## Running the Experiment
 
-
 ### Required Parameters
 
 This experiment requires the following parameters:
 
 * Environment Variables
   * `APPLICATION_ENTRYPOINT_URL` - Specifies the application entry point URL where your application can be reached in your environment.
-  *  `SERVICE_NAME` - the name of the service that you are going to kill
+  *  `POD_LABEL` - Specifies the label used to identify the pod that you are goin g to kill
+  *  `NODE_NAME` - Specifies the name of the node that will be drained
 
 ## Running the Experiment Direct from the Catalog using HTTP
 
@@ -40,24 +40,26 @@ You can run this experiment using the native `chaos` command, or using
 With the native `chaos` command:
 
 ```bash
-(chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100:32474; \
-            export SERVICE_NAME=my-service; \
-                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/kill-microservice/kill-microservice/kill-microservice.json
+(chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
+          $ export POD_LABEL=myapp; \
+          $ export NODE_NAME=mynode; \
+                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kubernetes/drain_node/drain_node_experiment.json
 ```
 
-> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL & SERVICE_NAME should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
+> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & NODE_NAME should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
 ```bash
 $ docker run -it \
-           -e APPLICATION_ENTRYPOINT_URL=http://192.168.99.100:32474 \
-           -e SERVICE_NAME=my-service \
+           -e APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp \
+           -e POD_LABEL=myapp \
+           -e NODE_NAME=mynode \
            -v `pwd`:/tmp/result \
            -v ~/.chaostoolkit:/tmp/settings \
            chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/kill-microservice/kill-microservice/kill-microservice.json
+           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kubernetes/drain_node/drain_node_experiment.json
 ```
 
 
@@ -69,22 +71,24 @@ You can run this experiment using the native `chaos` command, or using
 With the native `chaos` command:
 
 ```bash
-(chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100:32474; \
-            export SERVICE_NAME=my-service; \
-            chaos run kill-pods-experiment.json
+(chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
+          $ export POD_LABEL=myapp; \
+          $ export POD_NAMESPACE=testapp; \
+                   chaos run drain_node_experiment.json
 ```
 
-> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & POD_NAMESPACE should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
+> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & NODE_NAME should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
 ```bash
 $ docker run -it \
-           -e APPLICATION_ENTRYPOINT_URL=http://192.168.99.100:32474 \
-           -e SERVICE_NAME=my-service \
+           -e APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp \
+           -e POD_LABEL=myapp \
+           -e POD_NAMESPACE=testapp \
            -v `pwd`:/tmp/result \
            -v ~/.chaostoolkit:/tmp/settings \
            chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run kill-pods-experiment.json
+           run drain_node_experiment.json
 ```

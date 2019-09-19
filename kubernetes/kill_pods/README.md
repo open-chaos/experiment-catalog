@@ -1,6 +1,6 @@
-# Delete a Kubernetes Node Chaos Experiment
+# Kill a Kubernetes pod chaos experiment
 
-This experiment explores whether my application can maintain itself when a named Kubernetes node is deleted.
+This experiment explores whether my application can maintain itself when a Kubernetes pod dies
 
 ## Setup for Experiment Execution
 
@@ -13,7 +13,7 @@ This experiment uses the [free and open source Chaos Toolkit][chaostoolkit]. The
 
 ### Install Any Required Drivers
 
-The [Chaos Toolkit][chaostoolkit] is extended by adding [drivers]. This experiment requires the following drivers:
+The chaostoolkit is extended by adding [drivers] This experiment requires the following drivers:
 
 * Kubernetes Chaos Toolkit Driver [kubernetes-driver] [kubernetes-driver-github]
 
@@ -29,8 +29,8 @@ This experiment requires the following parameters:
 
 * Environment Variables
   * `APPLICATION_ENTRYPOINT_URL` - Specifies the application entry point URL where your application can be reached in your environment.
-  *  `POD_LABEL` - Specifies the label used to identify the pod that you are going to delete.
-  *  `NODE_NAME` - Specifies the name of the node that will be deleted.
+  *  `POD_LABEL` - Specifies the label used to identify the pod that you are goin g to kill
+  *  `POD_NAMESPACE` - Specifies the namespace that the pod resides in
 
 ## Running the Experiment Direct from the Catalog using HTTP
 
@@ -42,11 +42,11 @@ With the native `chaos` command:
 ```bash
 (chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
           $ export POD_LABEL=myapp; \
-          $ export NODE_NAME=mynode; \
-                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/delete-named-node/delete-named-node-exeriment.json
+          $ export POD_NAMESPACE=testapp; \
+                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kubernetes/kill_pods/kill_pods_experiment.json
 ```
 
-> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & NODE_NAME should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
+> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & POD_NAMESPACE should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
@@ -54,12 +54,12 @@ With `docker`:
 $ docker run -it \
            -e APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp \
            -e POD_LABEL=myapp \
-           -e NODE_NAME=mynode \
+           -e POD_NAMESPACE=testapp \
            -v `pwd`:/tmp/result \
            -v ~/.chaostoolkit:/tmp/settings \
-            chaostoolkit/chaostoolkit \
+           chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/delete-named-node/delete-named-node-exeriment.json
+           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kubernetes/kill_pods/kill_pods_experiment.json
 ```
 
 
@@ -74,10 +74,10 @@ With the native `chaos` command:
 (chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
           $ export POD_LABEL=myapp; \
           $ export POD_NAMESPACE=testapp; \
-                   chaos run delete-named-node-exeriment.json
+                   chaos run kill_pods_experiment.json
 ```
 
-> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & NODE_NAME should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
+> ***NOTE:*** The APPLICATION_ENTRYPOINT_URL, POD_LABEL & POD_NAMESPACE should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
@@ -88,7 +88,7 @@ $ docker run -it \
            -e POD_NAMESPACE=testapp \
            -v `pwd`:/tmp/result \
            -v ~/.chaostoolkit:/tmp/settings \
-             chaostoolkit/chaostoolkit \
+           chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run delete-named-node-exeriment.json
+           run kill_pods_experiment.json
 ```
