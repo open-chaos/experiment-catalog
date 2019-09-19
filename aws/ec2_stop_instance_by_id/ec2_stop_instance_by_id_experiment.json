@@ -1,0 +1,55 @@
+{
+    "version": "1.0.0",
+    "title": "My application is resilient to a named ec2 instance stopping",
+    "description": "Can my application maintain its minimum resources in the event of a named ec2 instance stopping?",
+    "tags": [
+        "platform:aws",
+        "service:ec2"
+    ],
+    "configuration": {
+        "service_url": {
+            "type": "env",
+            "key": "APPLICATION_ENTRYPOINT_URL"
+        },
+        "ec2_instance_id": {
+            "type": "env",
+            "key": "EC2_INSTANCE_ID"
+        }
+    },
+    "contributions": {
+        "availability": "high",
+        "reliability": "high",
+        "safety": "none",
+        "security": "none",
+        "performability": "medium"
+    },
+    "steady-state-hypothesis": {
+        "title": "Application is normal",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "application-must-respond-normally",
+                "tolerance": 200,
+                "provider": {
+                    "type": "http",
+                    "url": "${service_url}",
+                    "timeout": 3
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "stop_instance",
+            "provider": {
+                "type": "python",
+                "module": "chaosaws.ec2.actions",
+                "func": "stop_instance",
+                "arguments": {
+                    "instance_id": "${ec2_instance_id}"
+                }
+            }
+        }
+    ]
+}
