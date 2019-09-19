@@ -39,7 +39,7 @@ With the native `chaos` command:
 
 ```bash
 (chaostk) export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
-          chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/drain-node/delete-all-nodes.json
+          chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kubernetes/delete_all_nodes/delete_all_nodes.json
 ```
 
 > ***NOTE:*** The APPLICATION_ENTRYPOINT_URL should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
@@ -53,7 +53,7 @@ $ docker run -it \
            -v ~/.chaostoolkit:/tmp/settings \
             chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/drain-node/delete-all-nodes.json
+           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kubernetes/delete_all_nodes/delete_all_nodes.json
 ```
 
 
@@ -66,7 +66,7 @@ With the native `chaos` command:
 
 ```bash
 (chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
-            chaos run delete-all-nodes.json
+            chaos run delete_all_nodes.json
 ```
 
  ***NOTE:*** The APPLICATION_ENTRYPOINT_URL should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
@@ -80,5 +80,5 @@ $ docker run -it \
            -v ~/.chaostoolkit:/tmp/settings \
             chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run delete-all-nodes.json
+           run delete_all_nodes.json
 ```
