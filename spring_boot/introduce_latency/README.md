@@ -1,6 +1,6 @@
 # Introduce latency using the Chaos Monkey for Spring Boot
 
-This experiment explores whether my application can robustly respond to an increase in latency, injected 
+This experiment explores whether my application can robustly respond to an increase in latency, injected
 using the [Chaos Monkey for Spring Boot][chaosmonkey].
 
 [chaosmonkey]: https://codecentric.github.io/chaos-monkey-spring-boot/
@@ -44,7 +44,7 @@ With the native `chaos` command:
 ```bash
 (chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
           $ export CHAOS_MONKEY_ACTUATOR_URL=http://localhost:8080/actuator; \
-                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/spring-boot-latency/introduce-latency-experiment.json
+                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/spring_boot/introduce_latency/introduce_latency_experiment.json
 ```
 
 > ***NOTE:*** The APPLICATION_ENTRYPOINT_URL & CHAOS_MONKEY_ACTUATOR_URL should be setup according to your services run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
@@ -59,7 +59,7 @@ $ docker run -it \
            -v ~/.chaostoolkit:/tmp/settings \
            chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/spring-boot-latency/introduce-latency-experiment.json
+           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/spring_boot/introduce_latency/introduce_latency_experiment.json
 ```
 
 
@@ -73,7 +73,7 @@ With the native `chaos` command:
 ```bash
 (chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
           $ export CHAOS_MONKEY_ACTUATOR_URL=http://localhost:8080/actuator; \
-                   chaos run introduce-latency-experiment.json
+                   chaos run introduce_latency_experiment.json
 ```
 
 > ***NOTE:*** The APPLICATION_ENTRYPOINT_URL & CHAOS_MONKEY_ACTUATOR_URL should be setup according to your services run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
@@ -88,5 +88,5 @@ $ docker run -it \
            -v ~/.chaostoolkit:/tmp/settings \
            chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run introduce-latency-experiment.json
+           run introduce_latency_experiment.json
 ```
