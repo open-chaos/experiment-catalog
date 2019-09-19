@@ -41,7 +41,7 @@ With the native `chaos` command:
 
 ```bash
 (chaostk) export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
-          chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/aws-asg-terminate-random-instance/aws-asg-terminate-random-instance-experiment.json
+          chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/aws/asg-terminate-random-instance/asg_terminate_random_instance_experiment.json
 ```
 
 ***NOTE:*** The APPLICATION_ENTRYPOINT_URL should be setup according to your AWS run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
@@ -55,7 +55,7 @@ $ docker run -it \
            -v ~/.chaostoolkit:/tmp/settings \
             chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/aws-asg-terminate-random-instance/aws-asg-terminate-random-instance-experiment.json
+           chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/aws/asg-terminate-random-instance/asg_terminate_random_instance_experiment.json
 ```
 
 ### Running the Experiment from a Local Copy
@@ -67,7 +67,7 @@ With the native `chaos` command:
 
 ```bash
 (chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
-          chaos run aws-asg-terminate-random-instance-experiment.json
+          chaos run asg_terminate_random_instance_experiment.json
 ```
 
 ***NOTE:*** The APPLICATION_ENTRYPOINT_URL should be setup according to your AWS run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
@@ -82,5 +82,5 @@ $ docker run -it \
            -v ~/.chaostoolkit:/tmp/settings \
              chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run aws-asg-terminate-random-instance-experiment.json
+           run asg_terminate_random_instance_experiment.json
 ```
