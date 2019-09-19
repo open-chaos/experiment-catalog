@@ -6,13 +6,11 @@ This is a free, public and community-contributed catalog of chaos engineering ex
 
 The format of the catalog is relatively flexible, being a resource that will index many different types of experiments and even potentially different experiment-executing tools and systems. The current convention, where applicable, for a new experiment to be added to the catalog are:
 
-1. Every experiment should reside in its own directory below the top level of the catalog.
+1. Every experiment should reside in its own directory below a parent directory that is used to group experiments by target platform context, i.e. Kubernetes, Azure, AWS etc.
 
-   Due to the indexable nature of tags, every experiment is searchable and groupable based on these labels.
+2. Top level `tags` for an experiment are recommended to be `platform` and `service`, with a corresponding descriptor after a `:`.
 
-2. Top level `tags` for an experiment are recommended to be `Platform` and `Service`, with a corresponding descriptor after a `:`.
-
-   Platform specifies the overall platform being targetted or manipulated by the experiment, for example `Platform:kubernetes`. `Service`, where applicable, specifies any sub-service of the platform being employed, such as `Service:node`. Any combination of `Platform:*` and `Service:*` tags may be used for a single experiment so that it is appropriately indexed for catalog searching.
+   Platform specifies the overall platform being targetted or manipulated by the experiment, for example `platform:kubernetes`. `service`, where applicable, specifies any sub-service of the platform being employed, such as `service:node`. Any combination of `platform:*` and `service:*` tags may be used for a single experiment so that it is appropriately indexed for catalog searching.
 
 3. A `README.md` is recommended, following the general template form as show by the [`file-must-not-disappear` experiment sample](file-must-not-disappear/README.md).
 
