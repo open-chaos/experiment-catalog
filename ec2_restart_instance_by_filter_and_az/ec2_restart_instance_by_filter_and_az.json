@@ -15,9 +15,9 @@
             "type": "env",
             "key": "INSTANCE_ID"
         },
-        "availability_region": {
+        "availability_zone": {
             "type": "env",
-            "key": "AVAILABILITY_REGION"
+            "key": "AVAILABILITY_ZONE"
         }
     },
     "contributions": {
@@ -51,7 +51,7 @@
                 "module": "chaosaws.ec2.actions",
                 "func": "stop_instance",
                 "arguments": {
-                    "az": "${availability_region}",
+                    "az": "${availability_zone}",
                     "filters": [
                         {"Name": "instance-state-name", "Values": ["running"]},
                         {"Name": "instance-id", "Values": ["${instanceid}"]}

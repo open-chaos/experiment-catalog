@@ -32,7 +32,7 @@ This experiment requires the following parameters:
 * Environment Variables
   * `APPLICATION_ENTRYPOINT_URL` - Specifies the application entry point URL where your application can be reached in your environment.
   * `INSTANCE_ID` - The id of the instance that will be stopped using a filter.
-  * `AVAILABILITY_REGION` - The availability region of the instance that will be stopped.
+  * `AVAILABILITY_ZONE` - The availability region of the instance that will be stopped.
 
 ## Running the Experiment Direct from the Catalog using HTTP
 
@@ -44,19 +44,19 @@ With the native `chaos` command:
 ```bash
 (chaostk) export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
           export INSTANCE_ID=i-1234567890abcdef0; \
-          export AVAILABILITY_REGION=eu-west-2 ; \
+          export AVAILABILITY_ZONE=eu-west-2 ; \
           chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/aws/ec2_restart_instance_by_filter_and_az/ec2_restart_instance_by_filter_and_az.json
 ```
 
-***NOTE:*** The APPLICATION_ENTRYPOINT_URL and the EC2_INSTANCE_ID should be setup according to your AWS run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
+***NOTE:*** The APPLICATION_ENTRYPOINT_URL, INSTANCE_ID and the AVAILABILITY_ZONE should be setup according to your AWS run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
 ```bash
 $ docker run -it \
            -e APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp \
-           -e  INSTANCE_ID=i-1234567890abcdef0 \
-           -e AVAILABILITY_REGION=eu-west-2 \
+           -e INSTANCE_ID=i-1234567890abcdef0 \
+           -e AVAILABILITY_ZONE=eu-west-2 \
            -v `pwd`:/tmp/result \
            -v ~/.chaostoolkit:/tmp/settings \
             chaostoolkit/chaostoolkit \
@@ -74,20 +74,19 @@ With the native `chaos` command:
 ```bash
 (chaostk) export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp; \
           export INSTANCE_ID=i-1234567890abcdef0; \
-          export AVAILABILITY_REGION=eu-west-2 ; \
+          export AVAILABILITY_ZONE=eu-west-2 ; \
           chaos run ec2_restart_instance_by_filter_and_az.json
 ```
 
-***NOTE:*** The APPLICATION_ENTRYPOINT_URL and the EC2_INSTANCE_ID should be setup according to your AWS run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
-
+***NOTE:*** The APPLICATION_ENTRYPOINT_URL, INSTANCE_ID and the AVAILABILITY_ZONE should be setup according to your AWS run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
 ```bash
 $ docker run -it \
            -e APPLICATION_ENTRYPOINT_URL=http://192.168.99.100/myapp \
-           -e  INSTANCE_ID=i-1234567890abcdef0 \
-           -e AVAILABILITY_REGION=eu-west-2 \
+           -e INSTANCE_ID=i-1234567890abcdef0 \
+           -e AVAILABILITY_ZONE=eu-west-2 \
            -v `pwd`:/tmp/result \
            -v ~/.chaostoolkit:/tmp/settings \
              chaostoolkit/chaostoolkit \
