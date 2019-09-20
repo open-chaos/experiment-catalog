@@ -1,9 +1,9 @@
-# Stop Random [EC2][ElasticComputeCloud] instance in an [Avaialbility Zone][AvaialbilityZone] Chaos Experiment
+# Stop Random [EC2][ElasticComputeCloud] instance in an [Availability Zone][AvailabilityZone] Chaos Experiment
 
-This experiment explores whether my application can maintain itself when a random [EC2][ElasticComputeCloud] instance is stopped with an [availalbility zone][AvaialbilityZone].
+This experiment explores whether my application can maintain itself when a random [EC2][ElasticComputeCloud] instance is stopped with an [availability zone][AvailabilityZone].
 
 [ElasticComputeCloud]: https://aws.amazon.com/ec2/
-[AvaialbilityZone]:    https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
+[AvailabilityZone]:    https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
 
 ## Setup for Experiment Execution
 
