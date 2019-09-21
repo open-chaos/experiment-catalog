@@ -1,0 +1,76 @@
+{
+    "version": "1.0.0",
+    "title": "EC2 instances are self-healing",
+    "description": "Do instances restart on their own when they are stopped? Unlikely in a default case, which is why we use a rollback to restart it manually. It's expected this experiment will likely always fail",
+    "tags": [
+        "platform:aws",
+        "service:ec2"
+    ],
+    "configuration": {
+        "ec2_instance_id": {
+            "type": "env",
+            "key": "EC2_INSTANCE_ID"
+        }
+    },
+    "steady-state-hypothesis": {
+        "title": "EC2 instance self-heals",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "there-should-be-one-running-instance",
+                "tolerance": {
+                    "type": "jsonpath",
+                    "path": "$.Reservations[0].Instances[*][?(@.InstanceId=\"${ec2_instance_id}\")].State.Name",
+                    "expect": "running"
+                },
+                "provider": {
+                    "type": "python",
+                    "module": "chaosaws.ec2.probes",
+                    "func": "describe_instances",
+                    "arguments": {
+                        "filters": [
+                            {"Name": "availability-zone", "Values": ["us-east-1c"]}
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "stopping-instance-now",
+            "provider": {
+                "type": "python",
+                "module": "chaosaws.ec2.actions",
+                "func": "stop_instance",
+                "arguments": {
+                    "instance_id": "${ec2_instance_id}",
+                    "filters": [
+                        {"Name": "availability-zone", "Values": ["us-east-1c"]}
+                    ]
+                }
+            },
+            "pauses": {
+                "after": 15
+            }
+        }
+    ],
+    "rollbacks": [
+        {
+            "type": "action",
+            "name": "starting-instance-again",
+            "provider": {
+                "type": "python",
+                "module": "chaosaws.ec2.actions",
+                "func": "start_instances",
+                "arguments": {
+                    "instance_ids": ["${ec2_instance_id}"]
+                }
+            },
+            "pauses": {
+                "before": 15
+            }
+        }
+    ]
+}
