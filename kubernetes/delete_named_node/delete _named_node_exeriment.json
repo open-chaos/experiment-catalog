@@ -11,10 +11,6 @@
             "type": "env",
             "key": "APPLICATION_ENTRYPOINT_URL"
         },
-        "pod_label_selector": {
-            "type": "env",
-            "key": "POD_LABEL"
-        },
         "node_name": {
             "type": "env",
             "key": "NODE_NAME"
