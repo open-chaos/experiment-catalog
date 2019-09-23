@@ -1,0 +1,41 @@
+{
+    "version": "1.0.0",
+    "title": "Set-up the system for the Game Day by injecting the turbulent condition of a deleted node",
+    "description": "Deletes a node from the cluster",
+    "tags": [
+        "platform:kubernetes",
+        "service:node",
+        "type:gameday"
+    ],
+    "configuration": {
+        "service_url": {
+            "type": "env",
+            "key": "APPLICATION_ENTRYPOINT_URL"
+        },
+        "node_name": {
+            "type": "env",
+            "key": "NODE_NAME"
+        }
+    },
+    "contributions": {
+        "availability": "high",
+        "reliability": "high",
+        "safety": "none",
+        "security": "none",
+        "performability": "medium"
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "uncordon_node",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.node.actions",
+                "func": "uncordon_node",
+                "arguments": {
+                    "name": "${node_name}"
+                }
+            }
+        }
+    ]
+}
