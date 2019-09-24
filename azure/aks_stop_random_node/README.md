@@ -29,8 +29,6 @@ This experiment requires the following parameters:
 
 * Environment Variables
   * `APPLICATION_ENTRYPOINT_URL` - Specifies the application entry point URL where your application can be reached in your environment.
-  *  `POD_LABEL` - Specifies the label used to identify the pod that you are going to delete.
-  *  `NODE_NAME` - Specifies the name of the node that will be deleted.
 
 ## Running the Experiment Direct from the Catalog using HTTP
 

@@ -11,10 +11,6 @@
             "type": "env",
             "key": "APPLICATION_ENTRYPOINT_URL"
         },
-        "pod_label_selector": {
-            "type": "env",
-            "key": "POD_LABEL"
-        },
         "node_name": {
             "type": "env",
             "key": "NODE_NAME"
@@ -23,9 +19,9 @@
     "contributions": {
         "availability": "high",
         "reliability": "high",
-        "safety": "medium",
+        "safety": "none",
         "security": "none",
-        "performability": "none"
+        "performability": "medium"
     },
     "steady-state-hypothesis": {
         "title": "Application is normal",
@@ -44,7 +40,7 @@
     },
     "method": [
         {
-            
+
             "type": "action",
             "name": "drain_node",
             "provider": {
