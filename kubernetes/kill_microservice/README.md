@@ -42,7 +42,7 @@ With the native `chaos` command:
 ```bash
 (chaostk) $ export APPLICATION_ENTRYPOINT_URL=http://192.168.99.100:32474; \
             export SERVICE_NAME=my-service; \
-                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/kubernetes/kill_microservice/kill_microservice.json
+                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kubernetes/kill_microservice/kill_microservice.json
 ```
 
 > ***NOTE:*** The APPLICATION_ENTRYPOINT_URL & SERVICE_NAME should be setup according to your Kubernetes run time environment. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
@@ -57,7 +57,7 @@ $ docker run -it \
            -v ~/.chaostoolkit:/tmp/settings \
            chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/kubernetes/kill_microservice/kill_microservice.json
+           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/kubernetes/kill_microservice/kill_microservice.json
 ```
 
 
