@@ -61,7 +61,7 @@ $ docker run -it \
           -v ~/.chaostoolkit:/tmp/settings \
           chaostoolkit/chaostoolkit \
           --settings /tmp/settings/settings.yaml \
-          run hhttps://raw.githubusercontent.com/open-chaos/experiment-catalog/master/azure/aks_stop_random_node/stop_random_node_experiment.json
+          run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/azure/aks_stop_random_node/stop_random_node_experiment.json
 
 
 ### Running the Experiment from a Local Copy
