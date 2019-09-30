@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "title": "My application is resilient0 to a named OpsWorks ec2 instance stopping",
+    "title": "My application is resilient to a named OpsWorks ec2 instance stopping",
     "description": "Can my application maintain its minimum resources in the event of a named ec2 instance stopping?",
     "tags": [
         "platform:aws",
@@ -29,7 +29,7 @@
         "reliability": "high",
         "safety": "none",
         "security": "none",
-        "performability": "medium"
+        "performability": "none"
     },
     "steady-state-hypothesis": {
         "title": "Application is normal",
