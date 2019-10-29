@@ -35,7 +35,7 @@ With the native `chaos` command:
 
 ```bash
 (chaostk) $ export FILE_TO_CHECK=temp.txt; \
-                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/file-must-not-disappear/file-must-not-disappear.json
+                   chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/local/file_must_not_disappear/file_must_not_disappear.json
 ```
 
 > ***NOTE:*** The `temp.txt` should be changed to whatever file you want to ensure is present after deployment has occurred. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
@@ -49,7 +49,7 @@ $ docker run -it \
            -v ~/.chaostoolkit:/tmp/settings \
            chaostoolkit/chaostoolkit \
            --settings /tmp/settings/settings.yaml \
-           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/file-must-not-disappear/file-must-not-disappear.json
+           run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/local/file_must_not_disappear/file_must_not_disappear.json
 ```
 
 
