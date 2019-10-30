@@ -14,6 +14,10 @@
         "pod_label_selector": {
             "type": "env",
             "key": "POD_LABEL"
+        },
+        "namespace": {
+            "type": "env",
+            "key": "POD_NAMESPACE"
         }
     },
     "contributions": {
@@ -47,7 +51,8 @@
                 "type": "python",
                 "func": "terminate_pods",
                 "arguments": {
-                    "label_selector": "${pod_label_selector}"
+                    "label_selector": "${pod_label_selector}",
+                    "ns": "${namespace}"
                 }
             },
             "pauses": {
