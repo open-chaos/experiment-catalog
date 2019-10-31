@@ -1,0 +1,59 @@
+{
+    "version": "1.0.0",
+    "title": "A stateless service will still respond after a docker restart",
+    "description": "A stateless http service will still respond as expected after the docker container is restarted",
+    "tags": [
+        "platform:general",
+        "service:docker"
+  ],
+  "configuration": {
+      "service_url": {
+          "type": "env",
+          "key": "APPLICATION_ENTRYPOINT_URL"
+      },
+      "docker_container_name": {
+          "type": "env",
+          "key": "DOCKER_CONTAINER_NAME"
+      }
+  },
+  "contributions": {
+      "availability": "high",
+      "reliability": "high",
+      "safety": "none",
+      "security": "none",
+      "performability": "medium"
+  },
+
+    "steady-state-hypothesis": {
+      "title": "Application is normal",
+      "probes": [
+          {
+              "type": "probe",
+              "name": "application-must-respond-normally",
+              "tolerance": 200,
+              "provider": {
+                  "type": "http",
+                  "url": "${service_url}",
+                  "timeout": 0.5
+              }
+          }
+      ]
+  },
+    "method": [
+      {
+        "type": "action",
+        "name": "restart docker image",
+        "provider": {
+          "type": "process",
+          "path": "docker",
+          "arguments": "restart ${docker_container_name}"
+        },
+        "pauses": {
+          "after": 1
+      }
+      }
+    ],
+    "rollbacks": [
+
+    ]
+  }
