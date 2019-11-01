@@ -1,0 +1,49 @@
+{
+    "version": "1.0.0",
+    "title": "Checks the hypothesis that a URL responds with a 200 status",
+    "description": "Check a given url responds with a 200 status",
+    "tags": [
+        "platform:local",
+        "service:url"
+    ],
+    "configuration": {
+        "endpoint_url": {
+            "type": "env",
+            "key": "ENDPOINT_URL"
+        }
+    },
+    "contributions": {
+        "availability": "high",
+        "reliability": "none",
+        "safety": "none",
+        "security": "none",
+        "performability": "none"
+    },
+    "steady-state-hypothesis": {
+        "title": "Application is normal",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "application-must-respond-normally",
+                "tolerance": 200,
+                "provider": {
+                    "type": "http",
+                    "url": "${endpoint_url}",
+                    "timeout": 3
+                }
+            }
+        ]
+    },
+    "method": [
+		{
+            "type": "action",
+            "name": "dummy step",
+            "provider": {
+                "type": "process",
+                "path": "echo",
+                "arguments": ""
+            }
+        }
+    ],
+    "rollbacks": []
+}
