@@ -20,6 +20,8 @@ The format of the catalog is relatively flexible, being a resource that will ind
 
 If you wish to contribute to this experiment catalog, you are more than welcome to do so. Please, fork this project, make your changes, and submit a PR for review.
 
+We recommend that any experiments written to use the [Chaos Toolkit](https://chaostoolkit.org/) should use the toolkit's `chaos validate` command to test the syntax of an experiment before it is submitted for consideration to the catalog.
+
 This project also requires all contributors must sign a
 [Developer Certificate of Origin][dco] on each commit they would like to merge into the master branch of the repository. Please, make sure you can abide by the rules of the DCO before submitting a PR.
 
