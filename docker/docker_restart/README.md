@@ -39,7 +39,7 @@ With the native `chaos` command:
 ```bash
 (chaostk) export APPLICATION_ENTRYPOINT_URL=http://localhost:8080/dt; \
           export DOCKER_CONTAINER_NAME=demo_starlette; \
-          chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/local/docker_restart/docker_restart.json
+          chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/docker/docker_restart/docker_restart.json
 ```
 
 ***NOTE:*** The  APPLICATION_ENTRYPOINT_URL & DOCKER_NAME should be setup according to your run time environment.
