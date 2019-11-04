@@ -60,7 +60,9 @@
             "pauses": {
                 "after": 1
             }
-        },
+        }
+    ],
+    "rollbacks": [
         {
             "name": "delete_toxic",
             "provider": {
@@ -76,11 +78,6 @@
             "pauses": {
                 "after": 1
             }
-        }
-    ],
-    "rollbacks": [
-        {
-            "ref": "delete_toxic"
         }
     ]
 }
