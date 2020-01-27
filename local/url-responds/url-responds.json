@@ -41,7 +41,7 @@
             "provider": {
                 "type": "process",
                 "path": "echo",
-                "arguments": ""
+                "arguments": "URL used is: ${endpoint_url}"
             }
         }
     ],
