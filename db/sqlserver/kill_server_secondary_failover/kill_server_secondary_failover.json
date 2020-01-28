@@ -1,0 +1,55 @@
+{
+    "version": "1.0.0",
+    "title": "SQL Server failover and restart experiment",
+    "description": "Verifies that a SQL Server master fails over to a secondary node.",
+    "tags": [
+        "type:sqlserver",
+        "platform:db",
+        "service:io"
+    ],
+    "configuration": {
+        "server": {
+            "type": "env",
+            "key": "SERVER"
+        },
+        "availabilitygroup": {
+            "type": "env",
+            "key": "AVAILABILITY_GROUP"
+        }
+    },
+    "contributions": {
+        "availability": "high",
+        "reliability": "high",
+        "security": "none"
+    },
+    "steady-state-hypothesis": {
+        "title": "Listener is online",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "listener-is-online",
+                "tolerance": 0,
+                "provider": {
+                    "type": "process",
+                    "path": "listener_is_online.ps1",
+                    "arguments": [
+                        "-Server ${server}",
+                        "-AvailabilityGroup ${availabilitygroup}"
+                    ]
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "rollout-application-update",
+            "provider": {
+                "type": "process",
+                "path": "echo",
+                "arguments": "'updated'"
+            }
+        }
+    ],
+    "rollbacks": []
+}
