@@ -43,13 +43,23 @@
     "method": [
         {
             "type": "action",
-            "name": "rollout-application-update",
+            "name": "kill-sqlserver-service",
             "provider": {
                 "type": "process",
-                "path": "echo",
-                "arguments": "'updated'"
+                "path": "./force_kill_sqlserver_service.ps1",
+                "arguments": "-Server ${server}"
             }
         }
     ],
-    "rollbacks": []
+    "rollbacks": [
+        {
+            "type": "action",
+            "name": "restore-sqlserver-service",
+            "provider": {
+                "type": "process",
+                "path": "./start_sqlserver_service.ps1",
+                "arguments": "-Server ${server}"
+            }
+        }
+    ]
 }
