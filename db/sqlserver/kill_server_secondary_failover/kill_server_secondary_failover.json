@@ -12,9 +12,13 @@
             "type": "env",
             "key": "SERVER"
         },
-        "availabilitygroup": {
+        "listenername": {
             "type": "env",
-            "key": "AVAILABILITY_GROUP"
+            "key": "LISTENER_NAME"
+        },
+        "port": {
+            "type": "env",
+            "key": "PORT"
         }
     },
     "contributions": {
@@ -31,10 +35,11 @@
                 "tolerance": 0,
                 "provider": {
                     "type": "process",
-                    "path": "listener_is_online.ps1",
+                    "path": "./listener_is_online.ps1",
                     "arguments": [
                         "-Server ${server}",
-                        "-AvailabilityGroup ${availabilitygroup}"
+                        "-ListenerName ${listenername}",
+                        "-Port ${port}"
                     ]
                 }
             }
