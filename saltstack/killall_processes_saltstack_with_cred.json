@@ -1,0 +1,32 @@
+{
+    "title": "Sample Experiment kills proccess by name",
+    "description": "This experiment kills processes by name",
+    "configuration": {
+        "environment": "any"
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "killall_processes",
+            "provider": {
+                "type": "python",
+                "module": "chaossaltstack.machine.actions",
+                "func": "killall_processes",
+                "arguments": {
+                    "execution_duration": "60",
+                    "process_name": "java",
+                    "signal": "-9",
+                    "instance_ids": [ "scdcr100237" ]
+                },
+                "secrets": ["saltstack"]
+            }
+        }
+    ],
+    "secrets": {
+        "saltstack": {
+            "SALTMASTER_HOST": "http://<saltmaster_host>:<port>",
+            "SALTMASTER_USER": "<user>",
+            "SALTMASTER_PASSWORD": "<pass>"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "title": "Sample Experiment Burn CPU",
+    "description": "This experiment runs CPU intensive processes, simulating a noisy neighbor or a faulty CPU. The instance will effectively have a much slower CPU.",
+    "configuration": {
+        "environment": "any"
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "burn_cpu",
+            "provider": {
+                "type": "python",
+                "module": "chaossaltstack.machine.actions",
+                "func": "burn_cpu",
+                "arguments": {
+                    "execution_duration": "60",
+                    "instance_ids": [ "scdcr100237" ]
+                },
+                "secrets": ["saltstack"]
+            }
+        }
+    ],
+    "secrets": {
+        "saltstack": {
+            "SALTMASTER_HOST": "http://<saltmaster_host>:<port>",
+            "SALTMASTER_USER": "<user>",
+            "SALTMASTER_PASSWORD": "<pass>"
+        }
+    }
+}

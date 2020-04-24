@@ -1,0 +1,32 @@
+{
+    "title": "Sample Experiment kills proccess by process or PID",
+    "description": "This experiment kills processes by process or PID",
+    "configuration": {
+        "environment": "any"
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "kill_process",
+            "provider": {
+                "type": "python",
+                "module": "chaossaltstack.machine.actions",
+                "func": "kill_process",
+                "arguments": {
+                    "execution_duration": "60",
+                    "process": "1024",
+                    "signal": "-9",
+                    "instance_ids": [ "scdcr100237" ]
+                },
+                "secrets": ["saltstack"]
+            }
+        }
+    ],
+    "secrets": {
+        "saltstack": {
+            "SALTMASTER_HOST": "http://<saltmaster_host>:<port>",
+            "SALTMASTER_USER": "<user>",
+            "SALTMASTER_PASSWORD": "<pass>"
+        }
+    }
+}
