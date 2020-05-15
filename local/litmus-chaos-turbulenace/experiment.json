@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "title": "Website responds with success status, when the server container restarts ",
+  "description": "Check the Website continues to responds with success status when litmus chaos restarts a server container.",
+  "tags": [
+      "platform:Staging Cluster",
+      "service:Website",
+      "turbulence:litmuschaos"
+  ],
+  "configuration": {
+      "endpoint_url": {
+          "type": "env",
+          "key": "ENDPOINT_URL"
+      },
+      "chaos_yaml": {
+        "type": "env",
+        "key": "CHAOS_YAML"
+    }
+
+  },
+  "contributions": {
+      "availability": "high",
+      "reliability": "high",
+      "safety": "none",
+      "security": "none",
+      "performability": "mdeium"
+  },
+  "steady-state-hypothesis": {
+      "title": "Website responds with success",
+      "probes": [
+          {
+              "type": "probe",
+              "name": "website-must-respond-normally",
+              "tolerance": 200,
+              "provider": {
+                  "type": "http",
+                  "url": "${endpoint_url}",
+                  "timeout": 3
+              }
+          }
+      ]
+  },
+  "method": [
+  {
+          "type": "action",
+          "name": "Restart the webserver container with litmus chaos",
+          "provider": {
+              "type": "process",
+              "path": "kubectl",
+              "arguments": "apply -f ${chaos_yaml}"
+          }
+      }
+  ],
+  "rollbacks": []
+}
