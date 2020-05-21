@@ -1,6 +1,6 @@
-# This Experiment Checks a URL Responds with Success (200) Status when the Webserver Container is Restarted by litmus-chaos
+# This Experiment Checks a URL Responds with Success (200) Status when the Webserver Container is restarted with litmus-chaos
 
-This experiment checks a URL responds with a success code when [litmuschaos][litmuschaos] is used to inject turbulence.
+This experiment checks a URL responds with a success code when [litmuschaos][litmuschaos] is used to restart the container.
 
 ## Setup for Experiment Execution
 
@@ -91,7 +91,7 @@ You can run this experiment using the native `chaos` command.
 
 Note in this case we have a method in the [experiment.json](experiment.json) that is going to use a python process to run the ```kubctl apply -f```, this will cause limuschaos to inject turbulence on the server.
 
-With the native `chaos` command:
+Run. the experiment with the native `chaos` command:
 
 ```bash
 (chaostk) ENDPOINT_URL=http://34.105.191.45  \
