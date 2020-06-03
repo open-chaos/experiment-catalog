@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "title": "Website responds with success status, when the server pods has a failure.",
+  "description": "Check the Website continues to responds with success status when chaos mesh induces failure on the web server pod.",
+  "tags": [
+      "platform:Staging Cluster",
+      "service:Website",
+      "turbulence:chaosmesh"
+  ],
+  "configuration": {
+      "endpoint_url": {
+          "type": "env",
+          "key": "ENDPOINT_URL"
+      },
+      "chaos_yaml": {
+        "type": "env",
+        "key": "CHAOS_YAML"
+    }
+
+  },
+  "contributions": {
+      "availability": "high",
+      "reliability": "high",
+      "safety": "none",
+      "security": "none",
+      "performability": "medium"
+  },
+  "steady-state-hypothesis": {
+      "title": "Website responds with success",
+      "probes": [
+          {
+              "type": "probe",
+              "name": "website-must-respond-normally",
+              "tolerance": 200,
+              "provider": {
+                  "type": "http",
+                  "url": "${endpoint_url}",
+                  "timeout": 3
+              }
+          }
+      ]
+  },
+  "method": [
+  {
+          "type": "action",
+          "name": "Induce pod failure on the webserver pods with chaos mesh",
+          "provider": {
+              "type": "process",
+              "path": "kubectl",
+              "arguments": "apply -f ${chaos_yaml}"
+          }
+      }
+  ],
+  "rollbacks": [
+    {
+      "type": "action",
+      "name": "remove the pod fail",
+      "provider": {
+          "type": "process",
+          "path": "kubectl",
+          "arguments": "delete -f ${chaos_yaml}"
+      }
+  }
+  ]
+}
