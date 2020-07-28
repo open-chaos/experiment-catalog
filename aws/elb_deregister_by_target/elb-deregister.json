@@ -14,7 +14,11 @@
       "elb_tag": {
         "type": "env",
         "key": "ELB_TARGET"
-      }
+      },
+      "ec2_az": {
+        "type": "env",
+        "key": "EC2_AZ"
+     }
     },
     "steady-state-hypothesis": {
       "title": "EC2 instance stopped and K8 recreating them",
