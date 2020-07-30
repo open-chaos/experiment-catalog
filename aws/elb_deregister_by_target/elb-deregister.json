@@ -1,0 +1,70 @@
+{
+    "version": "1.0.0",
+    "title": "EC2 instances Going from K8 cluster",
+    "description": "Do instances come up automatically from K8. It's expected this experiment will likely always pass based on time",
+    "tags": [
+      "platform:aws",
+      "service:ec2"
+    ],
+    "configuration": {
+      "aws_region": {
+        "type": "env",
+        "key": "AWS_REGION"
+      },
+      "elb_tag": {
+        "type": "env",
+        "key": "ELB_TARGET"
+      },
+      "ec2_az": {
+        "type": "env",
+        "key": "EC2_AZ"
+     }
+    },
+    "steady-state-hypothesis": {
+      "title": "EC2 instance stopped and K8 recreating them",
+      "probes": [
+        {
+          "type": "probe",
+          "name": "there-should-be-fixed-running-healthy-instance-in-elb",
+          "tolerance": {
+            "type": "jsonpath",
+            "path": "$.*.healthy",
+            "expect": [
+              3
+            ],
+            "target": "body"
+          },
+          "provider": {
+            "type": "python",
+            "module": "chaosaws.elbv2.probes",
+            "func": "targets_health_count",
+            "arguments": {
+              "tg_names": [
+                "${elb_tag}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "method": [
+      {
+        "type": "action",
+        "name": "stopping-instance-now",
+        "provider": {
+          "type": "python",
+          "module": "chaosaws.elbv2.actions",
+          "func": "deregister_target",
+          "arguments": {
+            "tg_name": "${elb_tag}"
+          }
+        },
+        "pauses": {
+          "after": 300
+        }
+      }
+    ],
+    "rollbacks": [
+      
+    ]
+  }
