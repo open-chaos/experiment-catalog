@@ -1,0 +1,24 @@
+{
+    "title": "Sample Experiment network loss",
+    "description": "This experiment makes your network loss",
+    "configuration": {
+        "environment": "any"
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "network_loss",
+            "provider": {
+                "type": "python",
+                "module": "chaossaltstack.machine.actions",
+                "func": "network_loss",
+                "arguments": {
+                    "execution_duration": "60",
+                    "loss_ratio": "5%",
+                    "device": "ens192",
+                    "instance_ids": [ "scdcr100237" ]
+                }
+            }
+        }
+    ]
+}

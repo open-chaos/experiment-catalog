@@ -1,0 +1,24 @@
+{
+    "title": "Sample Experiment network corruption",
+    "description": "This experiment makes your network package corruption",
+    "configuration": {
+        "environment": "any"
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "network_corruption",
+            "provider": {
+                "type": "python",
+                "module": "chaossaltstack.machine.actions",
+                "func": "network_corruption",
+                "arguments": {
+                    "execution_duration": "60",
+                    "corruption_ratio": "5%",
+                    "device": "ens192",
+                    "instance_ids": [ "scdcr100237" ]
+                }
+            }
+        }
+    ]
+}

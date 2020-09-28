@@ -1,0 +1,34 @@
+{
+    "title": "Sample Experiment network latency",
+    "description": "This experiment add latency to your network",
+    "configuration": {
+        "environment": "any"
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "network_latency",
+            "provider": {
+                "type": "python",
+                "module": "chaossaltstack.machine.actions",
+                "func": "network_latency",
+                "arguments": {
+                    "execution_duration": "60",
+                    "delay": "500ms",
+                    "variance": "50ms",
+                    "ratio": "5%",
+                    "device": "ens192",
+                    "instance_ids": [ "scdcr100237","scdcr100238" ]
+                },
+                "secrets": ["saltstack"]
+            }
+        }
+    ],
+    "secrets": {
+        "saltstack": {
+            "SALTMASTER_HOST": "http://<saltmaster_host>:<port>",
+            "SALTMASTER_USER": "<user>",
+            "SALTMASTER_PASSWORD": "<pass>"
+        }
+    }
+}
