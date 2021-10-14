@@ -1,6 +1,6 @@
 # Auto Heal Restores application when instance is stopped Chaos Experiment
 
-This experiment explores whether my application can restore itself when a named [EC2][ElasticComputeCloud] instance is stopped. This EC2 instance is configured with [AWS OpsWorks][AwsOpsWorks] which includes in its Layers settings an Option to Auto-Heal auto healing is documented [here][instsnceAutoHeal]. The instance is setup by following these steps [Getting started with Linux stacks][linuxGettingStarted]. If the instance is stopped it will auto-heal after about 5 minutes, so the experiment has a 6 minute pausde after the last step.
+This experiment explores whether my application can restore itself when a named [EC2][ElasticComputeCloud] instance is stopped. This EC2 instance is configured with [AWS OpsWorks][AwsOpsWorks] which includes in its Layers settings an Option to Auto-Heal auto healing is documented [here][instsnceAutoHeal]. The instance is setup by following these steps [Getting started with Linux stacks][linuxGettingStarted]. If the instance is stopped it will auto-heal after about 5 minutes, so the experiment has a 6 minute pause after the last step.
 
 [ElasticComputeCloud]: https://aws.amazon.com/ec2/
 [AwsOpsWorks]: https://docs.aws.amazon.com/opsworks/index.html
@@ -31,8 +31,8 @@ The [Chaos Toolkit][chaostoolkit] is extended by adding [drivers]. This experime
 ### Boto Configuring Credentials
 
 The Chaos Toolkit Extension for AWS uses [Boto3][boto3] which has a number of
-options to [configure AWS credentails][credconfig] you need to ensure you have
-configured the credentails correctly to get the AWS extension to work.
+options to [configure AWS credentials][credconfig] you need to ensure you have
+configured the credentials correctly to get the AWS extension to work.
 
 [boto3]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
 [credconfig]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
@@ -43,10 +43,10 @@ This experiment requires the following parameters:
 
 * Environment Variables
   * `EC2_INSTANCE_ID` - The id of the instance that will be stopped.
-  * `AVAILABILITY_ZONE` - The availablity zone of the instance
-  * `AWS_REGION` - The AWS Region must be specified to use the Chaostookit extension for AWS
-  * `AWS_ACCESS_KEY_ID` - One way confguring AWS credentails
-  * `AWS_SECRET_ACCESS_KEY` - One way confguring AWS credentails
+  * `AVAILABILITY_ZONE` - The availability zone of the instance
+  * `AWS_REGION` - The AWS Region must be specified to use the Chaostoolkit extension for AWS
+  * `AWS_ACCESS_KEY_ID` - One way configuring AWS credentials
+  * `AWS_SECRET_ACCESS_KEY` - One way configuring AWS credentials
 
 ## Running the Experiment Direct from the Catalog using HTTP
 
@@ -64,7 +64,7 @@ With the native `chaos` command:
           chaos run https://raw.githubusercontent.com/open-chaos/experiment-catalog/master/aws/OpsWorks/ow_ec2_auto_heal_single_instance_service.json
 ```
 
-***NOTE:*** The  EC2_INSTANCE_ID, AVAILABILITY_ZONE & AWS_REGION should be setup according to your AWS run time environment. AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY environment variables is one way of configuring aws access when using the Cahostoolkit AWS extension. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
+***NOTE:*** The  EC2_INSTANCE_ID, AVAILABILITY_ZONE & AWS_REGION should be setup according to your AWS run time environment. AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY environment variables is one way of configuring aws access when using the Chaostoolkit AWS extension. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 
@@ -98,7 +98,7 @@ With the native `chaos` command:
           chaos run ec2_stop_instance_by_id_experiment.json
 ```
 
-***NOTE:*** The  EC2_INSTANCE_ID, AVAILABILITY_ZONE & AWS_REGION should be setup according to your AWS run time environment. AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY environment variables is one way of configuring aws access when using the Cahostoolkit AWS extension. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
+***NOTE:*** The  EC2_INSTANCE_ID, AVAILABILITY_ZONE & AWS_REGION should be setup according to your AWS run time environment. AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY environment variables is one way of configuring aws access when using the Chaostoolkit AWS extension. The docker command also uses the .chaostoolkit/settings.yaml from the users home directory.
 
 With `docker`:
 

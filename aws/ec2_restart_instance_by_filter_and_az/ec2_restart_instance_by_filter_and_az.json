@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "title": "My application is resilient to an ec2 instance that is restarted by applying a filter for a named region",
-    "description": "Can my application maintain its minimum resources in the event of a filtered ec2 instance restarting? The indstance is selected by filter in a named region",
+    "description": "Can my application maintain its minimum resources in the event of a filtered ec2 instance restarting? The instance is selected by filter in a named region",
     "tags": [
         "platform:aws",
         "service:ec2"

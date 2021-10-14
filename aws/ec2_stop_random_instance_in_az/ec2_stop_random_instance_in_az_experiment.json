@@ -11,7 +11,7 @@
             "type": "env",
             "key": "APPLICATION_ENTRYPOINT_URL"
         },
-        "availiablity_zone": {
+        "availability_zone": {
             "type": "env",
             "key": "AVAILABILITY_ZONE"
         }
