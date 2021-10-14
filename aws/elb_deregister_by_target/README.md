@@ -1,6 +1,6 @@
 # Stop random instance from target [ELB][ElasticComputeCloud] group Chaos Experiment
 
-This experiment explores whether my application can maintain itself when a named target [ELB][ElasticComputeCloud] instance is stoppe from ELB.
+This experiment explores whether my application can maintain itself when a named target [ELB][ElasticComputeCloud] instance is stopped from ELB.
 
 [ElasticComputeCloud]: https://docs.aws.amazon.com/elasticloadbalancing/index.html
 

@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "title": "My application is resilient to random termination of an asg instance",
-    "description": "Can my application maintain its minimum resources in the event of the rterminateion of a random asg instance?",
+    "description": "Can my application maintain its minimum resources in the event of the termination of a random asg instance?",
     "tags": [
         "platform:aws",
         "service:asg"
